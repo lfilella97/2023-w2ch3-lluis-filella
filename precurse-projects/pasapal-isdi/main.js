@@ -20,6 +20,7 @@ theInput.addEventListener("keyup", (event) => {
   if (event.code === "Enter") {
     checkAnswer();
   }
+
   if (event.code === "Space") {
     round();
   }
@@ -147,6 +148,7 @@ function createRosco() {
       element.innerHTML = abecedario[i];
       element.className = `div${i + 1} circle ${abecedario[i]}`;
     }
+
     circleContainer.appendChild(element);
   }
 }
@@ -268,13 +270,16 @@ const timerGameOver = () => {
   if (timer.innerHTML === `${userInput.value} WORDS OVER`) {
     return;
   }
+
   if (timer.innerHTML === "PASAPAL-ISDI") {
     return;
   }
+
   if (countDown === -1) {
     endGame("time");
     return;
   }
+
   timer.innerHTML = `${userInput.value} ${countDown--}`;
 
   setTimeout(drWhoTravelsInTimeAndSpaceLikeThisFunctionDo, 500);
@@ -288,10 +293,11 @@ const drWhoTravelsInTimeAndSpaceLikeThisFunctionDo = () => {
 const endGame = (reason) => {
   rulo = document.querySelectorAll(".circle");
   for (const each in rulo) {
-    if (Number.isInteger(+each)) {
+    if (Number.isInteger(Number(each))) {
       rulo[each].remove();
     }
   }
+
   if (reason === "time") {
     timer.innerHTML = `${userInput.value} TIME OVER`;
   } else if (reason === "words") {
@@ -299,6 +305,7 @@ const endGame = (reason) => {
   } else {
     timer.innerHTML = "PASAPAL-ISDI";
   }
+
   mainContent.innerHTML = null;
   rankUser();
   showRanking();
@@ -325,6 +332,7 @@ const round = () => {
     theInput.focus();
     return;
   }
+
   endGame("words");
 };
 
@@ -335,9 +343,11 @@ const checkWordsLeft = () => {
       count++;
     }
   }
+
   if (count === 0) {
     return false;
   }
+
   return true;
 };
 
@@ -345,6 +355,7 @@ const showQuestion = () => {
   if (actualLetter >= questions.length - 1) {
     actualLetter = -1;
   }
+
   actualLetter++;
   if (questions[actualLetter].status === null) {
     theQuestion.innerHTML = `${questions[actualLetter].question}`;
